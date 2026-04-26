@@ -2,7 +2,7 @@
 
 // Pour commit: commit mokoy save sama mac push diokh ko git
 // git add .
-// git commit -m "linga modifier" git commit -m "class Utilisateur1.2" 
+// git commit -m "linga modifier" git commit -m "class client" 
 // git push
 
 interface Authentifiable {
@@ -10,7 +10,7 @@ interface Authentifiable {
 }
 
 interface Affichable {
-    public function afficherer();
+    public function afficher();
 }
 
 class Personne {
@@ -85,4 +85,44 @@ abstract class Utilisateur extends Personne implements Authentifiable, Affichabl
     }
 
     abstract public function afficherRole();
+}
+
+
+class Client extends Utilisateur {
+    const TAUX_SIMPLE = 0.05;
+    const TAUX_PREMIUM = 0.15;
+
+    private $typeClient;
+
+    public function __construct($id, $nom, $email, $login, $motDePasse, $typeClient) {
+        parent::__construct($id, $nom, $email, $login, $motDePasse);
+        $this->typeClient = $typeClient;
+    }
+
+    public function getTypeClient() { 
+        return $this->typeClient; 
+    }
+
+    public function setTypeClient($typeClient) { 
+        $this->typeClient = $typeClient; 
+    }
+
+    public function calculerReduction($montant) {
+        $taux = ($this->typeClient === 'premium') ? self::TAUX_PREMIUM : self::TAUX_SIMPLE;
+        return $montant * $taux;
+    }
+
+    public function afficherInfos() {
+        parent::afficherInfos();
+        echo "Type client: " . $this->typeClient . "\n";
+    }
+
+    public function afficherRole() {
+        echo "Rôle : Client\n";
+    }
+
+    public function afficher() {
+        $this->afficherInfos();
+        $this->afficherRole();
+    }
 }
