@@ -46,7 +46,7 @@ class Personne {
     }
 
     public function afficherInfos() {
-        echo "ID: " . $this->id . "  Nom: " . $this->nom . "  Email: " . $this->email . "\n";
+        echo "ID: " . $this->id ."<br>". " Nom: " . $this->nom ."<br>". "  Email: " . $this->email . "<br>";
     }
 }
 
@@ -77,11 +77,11 @@ abstract class Utilisateur extends Personne implements Authentifiable, Affichabl
     }
 
     public function seConnecter() {
-        echo "Utilisateur " . $this->getLogin() . " connecté.\n";
+        echo "Utilisateur " . $this->getLogin() . " connecté.<br>";
     }
 
     public static function afficherNombre() {
-        echo "Nombre d'utilisateurs : " . self::$nombreUtilisateurs . "\n";
+        echo "Nombre d'utilisateurs : " . self::$nombreUtilisateurs . "<br>";
     }
 
     abstract public function afficherRole();
@@ -114,11 +114,11 @@ class Client extends Utilisateur {
 
     public function afficherInfos() {
         parent::afficherInfos();
-        echo "Type client: " . $this->typeClient . "\n";
+        echo "Type client: " . $this->typeClient . "<br>";
     }
 
     public function afficherRole() {
-        echo "Rôle : Client\n";
+        echo "Rôle : Client<br>";
     }
 
     public function afficher() {
@@ -148,7 +148,7 @@ class Employe extends Utilisateur {
     }
 
     public function afficherRole() {
-        echo "Rôle : Employé\n";
+        echo "Rôle : Employé<br>";
     }
 
     public function afficher() {
@@ -164,11 +164,11 @@ class Administrateur extends Utilisateur {
     }
 
     public function supprimerUtilisateur(Utilisateur $u) {
-        echo "Utilisateur " . $u->getNom() . " supprimé par l'administrateur.\n";
+        echo "Utilisateur " . $u->getNom() . " supprimé par l'administrateur.<br>";
     }
 
     public function afficherRole() {
-        echo "Rôle : Administrateur\n";
+        echo "Rôle : Administrateur<br>";
     }
 
     public function afficher() {
@@ -180,3 +180,36 @@ class Administrateur extends Utilisateur {
 function afficherUtilisateur(Affichable $u) {
     $u->afficher();
 }
+
+$client = new Client(1, "Omar khaissa", "khaissa@mail.com", "Omar", "pass123", "premium");
+$employe = new Employe(2, "Damdam Ndong", "damdam@mail.com", "Damdam", "pass456", 350000);
+$admin = new Administrateur(3, "Omzo Dollard", "zodollard@mail.com", "clara", "admin789");
+
+echo "=== Affichage Client ===<br>";
+afficherUtilisateur($client);
+
+echo "<br>=== Affichage Employé ===<br>";
+afficherUtilisateur($employe);
+
+echo "<br>=== Affichage Administrateur ===<br>";
+afficherUtilisateur($admin);
+
+echo "<br>=== Connexions ===<br>";
+$client->seConnecter();
+$employe->seConnecter();
+$admin->seConnecter();
+
+echo "<br>=== Réduction Client ===<br>";
+$montant = 100000;
+$reduction = $client->calculerReduction($montant);
+echo "Réduction sur $montant FCFA : $reduction FCFA\n";
+
+echo "<br>=== Salaire Annuel Employé ===<br>";
+$annuel = $employe->calculerSalaireAnnuel();
+echo "Salaire annuel : $annuel FCFA\n";
+
+echo "<br>=== Suppression par Admin ===<br>";
+$admin->supprimerUtilisateur($client);
+
+echo "<br>=== Nombre d'utilisateurs ===<br>";
+Utilisateur::afficherNombre();
