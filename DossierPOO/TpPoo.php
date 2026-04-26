@@ -2,7 +2,7 @@
 
 // Pour commit: commit mokoy save sama mac push diokh ko git
 // git add .
-// git commit -m "linga modifier" git commit -m "class client" 
+// git commit -m "linga modifier" git commit -m "class Employe" 
 // git push
 
 interface Authentifiable {
@@ -119,6 +119,36 @@ class Client extends Utilisateur {
 
     public function afficherRole() {
         echo "Rôle : Client\n";
+    }
+
+    public function afficher() {
+        $this->afficherInfos();
+        $this->afficherRole();
+    }
+}
+
+class Employe extends Utilisateur {
+    private $salaire;
+
+    public function __construct($id, $nom, $email, $login, $motDePasse, $salaire) {
+        parent::__construct($id, $nom, $email, $login, $motDePasse);
+        $this->salaire = $salaire;
+    }
+
+    public function getSalaire() { 
+        return $this->salaire; 
+    }
+
+    public function setSalaire($salaire) { 
+        $this->salaire = $salaire; 
+    }
+
+    public function calculerSalaireAnnuel() {
+        return $this->salaire * 12;
+    }
+
+    public function afficherRole() {
+        echo "Rôle : Employé\n";
     }
 
     public function afficher() {
