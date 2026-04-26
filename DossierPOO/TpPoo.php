@@ -2,7 +2,7 @@
 
 // Pour commit: commit mokoy save sama mac push diokh ko git
 // git add .
-// git commit -m "linga modifier" git commit -m "class Employe" 
+// git commit -m "linga modifier" git commit -m "class Administrateur" 
 // git push
 
 interface Authentifiable {
@@ -155,4 +155,28 @@ class Employe extends Utilisateur {
         $this->afficherInfos();
         $this->afficherRole();
     }
+}
+
+
+class Administrateur extends Utilisateur {
+    public function __construct($id, $nom, $email, $login, $motDePasse) {
+        parent::__construct($id, $nom, $email, $login, $motDePasse);
+    }
+
+    public function supprimerUtilisateur(Utilisateur $u) {
+        echo "Utilisateur " . $u->getNom() . " supprimé par l'administrateur.\n";
+    }
+
+    public function afficherRole() {
+        echo "Rôle : Administrateur\n";
+    }
+
+    public function afficher() {
+        $this->afficherInfos();
+        $this->afficherRole();
+    }
+}
+
+function afficherUtilisateur(Affichable $u) {
+    $u->afficher();
 }
