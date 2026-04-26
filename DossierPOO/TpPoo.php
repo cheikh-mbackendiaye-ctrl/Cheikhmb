@@ -63,10 +63,16 @@ abstract class Utilisateur extends Personne implements Authentifiable, Affichabl
     }
 
     public function getLogin() { return $this->login; }
-    public function getMotDePasse() { return $this->motDePasse; }
+    public function getMotDePasse() { 
+        return $this->motDePasse; 
+    }
 
-    public function setLogin($login) { $this->login = $login; }
-    public function setMotDePasse($motDePasse) { $this->motDePasse = $motDePasse; }
+    public function setLogin($login) { 
+        $this->login = $login; 
+    }
+    public function setMotDePasse($motDePasse) { 
+        $this->motDePasse = $motDePasse; 
+    }
 
     public function seConnecter() {
         echo "Utilisateur " . $this->getLogin() . " connecté.\n";
