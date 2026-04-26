@@ -2,7 +2,7 @@
 
 // Pour commit: commit mokoy save sama mac push diokh ko git
 // git add .
-// git commit -m "linga modifier" git commit -m "class Utilisateur" 
+// git commit -m "linga modifier" git commit -m "class Utilisateur1.2" 
 // git push
 
 interface Authentifiable {
@@ -62,7 +62,9 @@ abstract class Utilisateur extends Personne implements Authentifiable, Affichabl
         self::$nombreUtilisateurs++;
     }
 
-    public function getLogin() { return $this->login; }
+    public function getLogin() { 
+        return $this->login; 
+    }
     public function getMotDePasse() { 
         return $this->motDePasse; 
     }
